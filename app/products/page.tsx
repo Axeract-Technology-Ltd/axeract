@@ -74,7 +74,11 @@ export default function ProductsPage() {
                   Getting stronger shouldn&apos;t take a spreadsheet, a coach on speed dial or guesswork. Physora is being designed to make training clear,
                   motivating and simple to stick with.
                 </p>
-                <p className="t-body text-[16px]">It&apos;s in development now. Leave us a message and we&apos;ll let you know when it&apos;s ready.</p>
+                <p className="t-body text-[16px]">It&apos;s in development now. See what&apos;s coming at{" "}
+                  <a href={PHYSORA.url} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4 hover:text-brand-text">
+                    physora.axeract.ai
+                  </a>
+                  .</p>
               </div>
               <dl className="grid grid-cols-3 border-t border-line pt-6 text-center">
                 {[
@@ -88,8 +92,11 @@ export default function ProductsPage() {
                   </div>
                 ))}
               </dl>
-              <div>
-                <Button href="/contact" variant="brand" size="lg" className="rounded-full">
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                <Button href={PHYSORA.url} newTab variant="brand" size="lg" className="rounded-full">
+                  Visit Physora
+                </Button>
+                <Button href="/contact" variant="ghost" size="lg" className="px-0">
                   Get launch updates
                 </Button>
               </div>

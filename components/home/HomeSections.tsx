@@ -243,8 +243,11 @@ export function Products() {
               <Chip key={t}>{t}</Chip>
             ))}
           </ul>
-          <div className="mt-8">
-            <Button href="/products#physora" variant="brand" size="lg" className="rounded-full">
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Button href={PHYSORA.url} newTab variant="brand" size="lg" className="rounded-full">
+              Visit Physora
+            </Button>
+            <Button href="/products#physora" variant="ghost" size="lg" className="px-0">
               Discover Physora
             </Button>
           </div>

@@ -8,6 +8,7 @@ export const SITE = {
 /** Axeract's first product. Keep claims to what is true today: a muscle-building mobile app, in development. */
 export const PHYSORA = {
   name: "Physora",
+  url: "https://physora.axeract.ai",
   tagline: "Muscle building, made simple.",
   status: "In development",
   tags: ["Fitness", "Muscle Building", "Mobile App", "In Development"],

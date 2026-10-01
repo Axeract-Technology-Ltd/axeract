@@ -18,6 +18,8 @@ type Props = {
   type?: "button" | "submit";
   onClick?: () => void;
   disabled?: boolean;
+  /** open href in a new tab (for other sites) */
+  newTab?: boolean;
   "aria-label"?: string;
 };
 
@@ -53,6 +55,7 @@ export function Button({
   type = "button",
   onClick,
   disabled,
+  newTab,
   ...rest
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
@@ -87,6 +90,23 @@ export function Button({
     </>
   );
 
+  if (href && newTab) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        ref={ref as React.RefObject<HTMLAnchorElement>}
+        className={cls}
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+        {...rest}
+      >
+        {inner}
+        <span className="sr-only"> (opens in a new tab)</span>
+      </a>
+    );
+  }
   if (href) {
     return (
       <TransitionLink
