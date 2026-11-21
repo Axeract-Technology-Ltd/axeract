@@ -483,15 +483,20 @@ video {
   }
 }
 
-/* Physora: the product's own cyan → blue → violet gradient, sampled from its logo */
+/* product accents — Physorify's cyan→violet gradient (from its logo), Postmondo's teal (from its site) */
 :root {
-  --physora-grad: linear-gradient(135deg, #9eeaf0 0%, #7fb4f5 45%, #6a5cf0 100%);
+  --physorify-grad: linear-gradient(135deg, #9eeaf0 0%, #7fb4f5 45%, #6a5cf0 100%);
+  --postmondo: #0491b2;
+  --postmondo-deep: #035e74;
 }
-.text-physora {
+.text-physorify {
   background: linear-gradient(90deg, #4f8ff0, #6a5cf0);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
-:root[data-theme="dark"] .text-physora { background: linear-gradient(90deg, #9eeaf0, #a99cff); -webkit-background-clip: text; background-clip: text; }
-.bg-physora { background: var(--physora-grad); }
+:root[data-theme="dark"] .text-physorify { background: linear-gradient(90deg, #9eeaf0, #a99cff); -webkit-background-clip: text; background-clip: text; }
+.bg-physorify { background: var(--physorify-grad); }
+.text-postmondo { color: var(--postmondo); }
+:root[data-theme="dark"] .text-postmondo { color: #3fc0dc; }
+.bg-postmondo { background: linear-gradient(135deg, var(--postmondo), var(--postmondo-deep)); }

@@ -14,7 +14,7 @@ export default function PrivacyPage() {
     <LegalPage
       label="Privacy"
       title="Privacy Policy"
-      intro={`This policy explains how ${SITE.legalName} ("Axeract", "we") handles personal information collected through axeract.ai. Individual Axeract products, such as Physora, publish their own privacy notices.`}
+      intro={`This policy explains how ${SITE.legalName} ("Axeract", "we") handles personal information collected through axeract.ai. Individual Axeract products, such as Physorify and Postmondo, publish their own privacy notices.`}
     >
       <LegalSection n={1} title="What we collect">
         <p>

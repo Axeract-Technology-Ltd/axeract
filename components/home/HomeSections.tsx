@@ -2,8 +2,9 @@ import Image from "next/image";
 import { Label, MaskedHeading } from "@/components/typography/Label";
 import { Button } from "@/components/ui/Button";
 import { Chip, HeroCard, HeroPhoto, Prism, Rings, SectionHead } from "@/components/sections/Shared";
-import { PhysoraPhone } from "@/components/products/PhysoraPhone";
-import { PHYSORA } from "@/lib/constants/site";
+import { PhysorifyPhone } from "@/components/products/PhysorifyPhone";
+import { BrowserFrame, ProductLogo, ProductName } from "@/components/products/ProductBits";
+import { PRODUCTS, type Product } from "@/lib/constants/site";
 import { TechIcon, type TechKey } from "@/components/products/TechIcon";
 import { IMG } from "@/lib/constants/images";
 import { cn } from "@/lib/utils";
@@ -194,7 +195,30 @@ export function WhatWeBuild() {
   );
 }
 
-/* 04 — products: Physora split + what's next */
+/* 04 — products: one split per product (alternating sides) + what's next */
+function ProductVisual({ product }: { product: Product }) {
+  if (product.key === "physorify") {
+    return (
+      <>
+        <Image src={IMG.physorifyGym.src} alt={IMG.physorifyGym.alt} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
+        <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#0b0c16]/65 via-transparent to-transparent" />
+        <div className="absolute bottom-6 left-6 lg:-right-14 lg:bottom-12 lg:left-auto">
+          <PhysorifyPhone />
+        </div>
+      </>
+    );
+  }
+  return (
+    <>
+      <Image src={IMG.postmondoStudio.src} alt={IMG.postmondoStudio.alt} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover object-[20%_50%]" />
+      <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#03252e]/60 via-[#03252e]/10 to-transparent" />
+      <div className="absolute inset-x-6 bottom-6 lg:inset-x-auto lg:-left-14 lg:bottom-12 lg:w-[min(620px,88%)]">
+        <BrowserFrame src={IMG.postmondoCalendar.src} alt={IMG.postmondoCalendar.alt} domain={product.domain} sizes="(min-width:1024px) 620px, 90vw" />
+      </div>
+    </>
+  );
+}
+
 export function Products() {
   return (
     <section id="products" className="scroll-mt-20 rule-b" aria-labelledby="products-heading">
@@ -208,51 +232,60 @@ export function Products() {
         />
       </div>
 
-      <div className="tone-soft grid grid-cols-1 rule-t lg:grid-cols-2">
-        <div className="relative min-h-[460px] lg:min-h-[720px]">
-          <Image src={IMG.physoraGym.src} alt={IMG.physoraGym.alt} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
-          <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-[#0b0c16]/65 via-transparent to-transparent" />
-          <div className="absolute bottom-6 left-6 lg:-right-14 lg:bottom-12 lg:left-auto">
-            <PhysoraPhone />
+      {PRODUCTS.map((p, n) => {
+        const flip = n % 2 === 1;
+        return (
+          <div key={p.key} className={cn("grid grid-cols-1 rule-t lg:grid-cols-2", flip ? "bg-surface" : "tone-soft")}>
+            <div className={cn("relative min-h-[460px] overflow-visible lg:min-h-[720px]", flip && "lg:order-2")}>
+              <ProductVisual product={p} />
+            </div>
+            <div
+              className={cn(
+                "flex flex-col justify-center px-[var(--gutter)] py-16 lg:py-24",
+                flip
+                  ? "lg:order-1 lg:pl-[max(var(--gutter),calc((100vw-1440px)/2+4rem))] lg:pr-24"
+                  : "lg:pl-24 lg:pr-[max(var(--gutter),calc((100vw-1440px)/2+4rem))]",
+              )}
+            >
+              <Label index={String(n + 1).padStart(2, "0")}>Product</Label>
+              <div className="mt-8 flex items-center gap-4">
+                <ProductLogo product={p} size={48} />
+                <span>
+                  <ProductName product={p} className="block text-[28px] leading-none" />
+                  <span className="t-label mt-2 block">
+                    {p.category} · {p.status}
+                  </span>
+                </span>
+              </div>
+              <MaskedHeading as="h3" lines={[...p.lines]} className="t-title mt-8" />
+              <p className="t-body mt-6 max-w-[48ch] text-[16px]" data-reveal>
+                {p.summary}
+              </p>
+              <ul className="mt-8 flex flex-col">
+                {p.features.map((f, i) => (
+                  <li key={f} className="flex items-center gap-4 border-t border-line py-3.5" data-reveal style={delay(i * 60)}>
+                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-brand text-[11px] font-medium text-brand-text">{i + 1}</span>
+                    <span className="font-display text-[19px] leading-tight">{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <ul className="flex flex-wrap gap-2 border-t border-line pt-6" aria-label={`${p.name} tags`}>
+                {p.tags.map((t) => (
+                  <Chip key={t}>{t}</Chip>
+                ))}
+              </ul>
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <Button href={p.url} newTab variant="brand" size="lg" className="rounded-full">
+                  Visit {p.name}
+                </Button>
+                <Button href={`/products#${p.key}`} variant="ghost" size="lg" className="px-0">
+                  Discover {p.name}
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col justify-center px-[var(--gutter)] py-16 lg:py-24 lg:pl-24 lg:pr-[max(var(--gutter),calc((100vw-1440px)/2+4rem))]">
-          <Label index="01">Product</Label>
-          <div className="mt-8 flex items-center gap-4">
-            <Image src={PHYSORA.logo.src} alt="" width={40} height={49} className="h-12 w-auto" />
-            <span>
-              <span className="font-display text-physora block text-[28px] leading-none">Physora</span>
-              <span className="t-label mt-2 block">{PHYSORA.status}</span>
-            </span>
-          </div>
-          <MaskedHeading as="h3" lines={["Muscle building,", "made simple."]} className="t-title mt-8" />
-          <p className="t-body mt-6 max-w-[46ch] text-[16px]" data-reveal>
-            Physora is a mobile app for building muscle. It&apos;s Axeract&apos;s first product, designed around one idea: getting stronger should feel
-            clear, motivating and simple to stick with.
-          </p>
-          <ol className="mt-8 flex flex-col">
-            {["Train with purpose.", "See yourself progress.", "Keep building."].map((s, i) => (
-              <li key={s} className="flex items-center gap-5 border-t border-line py-4" data-reveal style={delay(i * 80)}>
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-brand text-[12px] font-medium text-brand-text">{i + 1}</span>
-                <span className="font-display text-[22px] leading-none">{s}</span>
-              </li>
-            ))}
-          </ol>
-          <ul className="flex flex-wrap gap-2 border-t border-line pt-6" aria-label="Product tags">
-            {PHYSORA.tags.map((t) => (
-              <Chip key={t}>{t}</Chip>
-            ))}
-          </ul>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <Button href={PHYSORA.url} newTab variant="brand" size="lg" className="rounded-full">
-              Visit Physora
-            </Button>
-            <Button href="/products#physora" variant="ghost" size="lg" className="px-0">
-              Discover Physora
-            </Button>
-          </div>
-        </div>
-      </div>
+        );
+      })}
 
       <div className="container-v py-16 md:py-24">
         <div className="card grid grid-cols-1 overflow-hidden md:grid-cols-12" data-reveal>

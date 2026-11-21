@@ -3,7 +3,7 @@ import { TransitionLink } from "@/components/animation/TransitionLink";
 import { Label, MaskedHeading } from "@/components/typography/Label";
 
 const LINKS = [
-  { label: "Products", href: "/products", text: "Physora and what we're building next." },
+  { label: "Products", href: "/products", text: "Physorify, Postmondo and what's next." },
   { label: "About", href: "/about", text: "Why Axeract exists and how we work." },
   { label: "Contact", href: "/contact", text: "Ask us anything, we'll reply." },
 ];

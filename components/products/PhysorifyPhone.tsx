@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { PHYSORA } from "@/lib/constants/site";
+import { PRODUCTS } from "@/lib/constants/site";
+
+const PHYSORIFY = PRODUCTS[0];
 import { cn } from "@/lib/utils";
 
 const RING = 2 * Math.PI * 34;
@@ -10,14 +12,14 @@ const ROWS = [
   { w: "70%", done: false },
 ];
 
-export function PhysoraPhone({ className }: { className?: string }) {
+export function PhysorifyPhone({ className }: { className?: string }) {
   return (
     <div className={cn("w-[210px] shrink-0 rounded-[28px] border border-white/15 bg-[#0b0c16] p-2 shadow-[0_30px_60px_-28px_rgba(0,0,0,0.65)] sm:w-[236px]", className)} aria-hidden>
       <div className="flex h-[400px] flex-col rounded-[22px] bg-[#11121f] p-4 text-white">
         <span className="flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <Image src={PHYSORA.logo.src} alt="" width={18} height={22} className="h-[22px] w-auto" />
-            <span className="text-[12px] font-medium tracking-[-0.01em]">Physora</span>
+            <Image src={PHYSORIFY.logo.src} alt="" width={18} height={22} className="h-[22px] w-auto" />
+            <span className="text-[12px] font-medium tracking-[-0.01em]">Physorify</span>
           </span>
           <span className="rounded-full border border-white/15 px-2 py-0.5 text-[8.5px] uppercase tracking-[0.14em] text-white/60">Preview</span>
         </span>
@@ -44,7 +46,7 @@ export function PhysoraPhone({ className }: { className?: string }) {
         <div className="mt-6 flex flex-1 flex-col gap-2.5">
           {ROWS.map((r, i) => (
             <span key={i} className="flex items-center gap-3 rounded-[12px] bg-white/[0.05] px-3 py-2.5">
-              <span className={cn("grid h-5 w-5 shrink-0 place-items-center rounded-full", r.done ? "bg-physora" : "border border-white/20")}>
+              <span className={cn("grid h-5 w-5 shrink-0 place-items-center rounded-full", r.done ? "bg-physorify" : "border border-white/20")}>
                 {r.done && (
                   <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" fill="none" stroke="#0b0c16" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M2.5 6.2 5 8.5 9.5 3.5" />
@@ -59,7 +61,7 @@ export function PhysoraPhone({ className }: { className?: string }) {
           ))}
         </div>
 
-        <span className="bg-physora mt-4 grid h-10 place-items-center rounded-full text-[12px] font-semibold text-[#0b0c16]">Start workout</span>
+        <span className="bg-physorify mt-4 grid h-10 place-items-center rounded-full text-[12px] font-semibold text-[#0b0c16]">Start workout</span>
       </div>
     </div>
   );
